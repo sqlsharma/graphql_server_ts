@@ -1,25 +1,34 @@
 import { RESTDataSource } from '@apollo/datasource-rest';
 
 export class OMDbAPI extends RESTDataSource {
-  override baseURL = "https://www.omdbapi.com/";
+  override baseURL = 'https://www.omdbapi.com/';
+
+  constructor(options?: { cache?: any }) {
+    super();
+    // Accept an options object for compatibility with callers that pass
+    // `{ cache }` when constructing the data source.
+    if (options?.cache) {
+      (this as any).cache = options.cache;
+    }
+  }
 
   async getMovie(imdbId: string) {
-    return this.get("", {
+    return this.get('', {
       params: {
         i: imdbId,
-        // plot: "full",
-        apikey: "f99dfbc1",
+        apikey: 'f99dfbc1',
       },
     });
   }
+
   async getMovieByTitle(title: string) {
-    return this.get("", {
-    params: {
+    return this.get('', {
+      params: {
         t: title,
-        apikey: "f99dfbc1",
-    },
+        apikey: 'f99dfbc1',
+      },
     });
-}
+  }
 }
 
  

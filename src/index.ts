@@ -1,10 +1,10 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { OMDbAPI } from './movies-api.js';
+import { resolvers } from './resolvers.js';
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
-// your data.
 const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
@@ -12,6 +12,12 @@ const typeDefs = `#graphql
   type Book {
     title: String
     author: String
+  }
+
+  type Movie {
+    title: String
+    year: String
+    imdbID: ID
   }
 
 type Author {
@@ -22,8 +28,10 @@ type Author {
   # clients can execute, along with the return type for each. In this
   # case, the "books" query returns an array of zero or more Books (defined above).
   type Query {
-    books: [Book],    auth: [Author]
-
+    books: [Book]
+    auth: [Author]
+    movie(imdbId: String!): Movie
+    movieByTitle(title: String!): Movie
   }
 
 #   type QueryA {
@@ -31,34 +39,6 @@ type Author {
 #   }
   
 `;
-
-const books_c = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
-
-const authors_c = [
-  {
-    authorname: 'Kate Chopin'
-  },
-  {
-    authorname: 'Paul J Dsaniels'
-  }
-];
-const resolvers = {
-  Query: {
-    books: () => books_c,
-    auth: () => authors_c,
-
-  },
- 
-};
 
 // for api as source
 interface ContextValue {
