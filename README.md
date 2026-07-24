@@ -1,4 +1,5 @@
 # graphql_server_ts
+# Query types
 
 **Query example:By Title:
 **
