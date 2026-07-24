@@ -14,7 +14,6 @@
   "dependencies": {
     "@apollo/datasource-rest": "^6.4.1",
     "@apollo/server": "^5.5.1",
-    "@nic-jennings/sql-datasource": "^0.0.7",
     "graphql": "^16.14.2"
   },
   "devDependencies": {
