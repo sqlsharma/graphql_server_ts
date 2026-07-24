@@ -1,8 +1,7 @@
 # graphql_server_ts
 # Query types
 
-**Query example:By Title:
-**
+**Query example:By Title:**
 query {
   movieByTitle(title: "Anaconda") {
     title
@@ -11,8 +10,8 @@ query {
   }
 }
 
-**Query example with imdbId:
-**
+**Query example with imdbId:**
+
 query {
   movie(imdbId: "tt0111161") {
     title
